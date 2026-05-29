@@ -64,6 +64,7 @@ func take_damage(amount: int) -> void:
 func _die() -> void:
 	dead = true
 	died.emit()
+	EventBus.enemy_killed.emit()   # +1 score
 	hitbox.set_deferred(&"monitoring", false)
 	stompbox.set_deferred(&"monitoring", false)
 	velocity = Vector2.ZERO

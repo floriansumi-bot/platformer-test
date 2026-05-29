@@ -1,0 +1,421 @@
+[gd_scene format=4]
+
+[ext_resource type="Texture2D" path="res://assets/textures/bg_sky2.png" id="1_y7c28"]
+[ext_resource type="Texture2D" path="res://assets/textures/bg_hills_far2.png" id="2_mwqve"]
+[ext_resource type="Texture2D" path="res://assets/textures/bg_hills_near2.png" id="3_1wwbb"]
+[ext_resource type="TileSet" path="res://src/tilesets/tileset_world.tres" id="4_10gr1"]
+[ext_resource type="PackedScene" path="res://src/pickups/coin/coin.tscn" id="5_m6mf6"]
+[ext_resource type="Script" path="res://src/pickups/coin/coin.gd" id="6_gncv8"]
+[ext_resource type="PackedScene" path="res://src/enemies/slime/slime.tscn" id="7_lg1gw"]
+[ext_resource type="Script" path="res://src/enemies/slime/slime.gd" id="8_cdpp2"]
+[ext_resource type="PackedScene" path="res://src/enemies/bee/bee.tscn" id="9_r0p21"]
+[ext_resource type="Script" path="res://src/enemies/bee/bee.gd" id="10_rka7j"]
+[ext_resource type="PackedScene" path="res://src/enemies/fire_boss/fire_boss.tscn" id="11_wd3mt"]
+[ext_resource type="Script" path="res://src/enemies/boss/boss.gd" id="12_taidm"]
+[ext_resource type="PackedScene" path="res://src/player/player.tscn" id="13_sqbaw"]
+[ext_resource type="Script" path="res://src/player/player.gd" id="14_0nkdp"]
+[ext_resource type="PackedScene" path="res://src/ui/hud/hud.tscn" id="15_dm773"]
+[ext_resource type="Script" path="res://src/ui/hud/hud.gd" id="16_c3hv2"]
+[ext_resource type="PackedScene" path="res://src/ui/pause_menu/pause_menu.tscn" id="17_31kg7"]
+[ext_resource type="Script" path="res://src/ui/pause_menu/pause_menu.gd" id="18_i32b7"]
+[ext_resource type="PackedScene" path="res://src/ui/victory/victory.tscn" id="19_ae38f"]
+[ext_resource type="Script" path="res://src/ui/victory/victory.gd" id="20_pj2go"]
+
+[node name="Level02" type="Node2D" unique_id=666709761]
+
+[node name="Sky" type="Parallax2D" parent="." unique_id=1313427631]
+scroll_scale = Vector2(0.1, 1)
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sky" unique_id=984428132]
+texture = ExtResource("1_y7c28")
+centered = false
+
+[node name="HillsFar" type="Parallax2D" parent="." unique_id=38418660]
+scroll_scale = Vector2(0.3, 1)
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="HillsFar" unique_id=849316818]
+texture = ExtResource("2_mwqve")
+centered = false
+
+[node name="HillsNear" type="Parallax2D" parent="." unique_id=921739030]
+scroll_scale = Vector2(0.6, 1)
+repeat_size = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="HillsNear" unique_id=948521199]
+texture = ExtResource("3_1wwbb")
+centered = false
+
+[node name="Terrain" type="TileMapLayer" parent="." unique_id=362661764]
+tile_map_data = PackedByteArray("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")
+tile_set = ExtResource("4_10gr1")
+
+[node name="OneWayPlatforms" type="TileMapLayer" parent="." unique_id=1016499712]
+tile_map_data = PackedByteArray("AAAWAAcAAQAAAAAAAAAXAAcAAQAAAAAAAAAYAAcAAQAAAAAAAAAwAAUAAQAAAAAAAAAxAAUAAQAAAAAAAAAyAAUAAQAAAAAAAABGAAYAAQAAAAAAAABHAAYAAQAAAAAAAABIAAYAAQAAAAAAAABqAAUAAQAAAAAAAABrAAUAAQAAAAAAAABsAAUAAQAAAAAAAACCAAcAAQAAAAAAAACDAAcAAQAAAAAAAACEAAcAAQAAAAAAAAA=")
+tile_set = ExtResource("4_10gr1")
+
+[node name="Coin" type="Area2D" parent="." unique_id=1211580452 instance=ExtResource("5_m6mf6")]
+position = Vector2(456, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@14" type="Area2D" parent="." unique_id=2001772583 instance=ExtResource("5_m6mf6")]
+position = Vector2(472, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@15" type="Area2D" parent="." unique_id=316243593 instance=ExtResource("5_m6mf6")]
+position = Vector2(488, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@16" type="Area2D" parent="." unique_id=1228869796 instance=ExtResource("5_m6mf6")]
+position = Vector2(504, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@17" type="Area2D" parent="." unique_id=1391600060 instance=ExtResource("5_m6mf6")]
+position = Vector2(888, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@18" type="Area2D" parent="." unique_id=1671562133 instance=ExtResource("5_m6mf6")]
+position = Vector2(904, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@19" type="Area2D" parent="." unique_id=803863085 instance=ExtResource("5_m6mf6")]
+position = Vector2(920, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@20" type="Area2D" parent="." unique_id=733426912 instance=ExtResource("5_m6mf6")]
+position = Vector2(936, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@21" type="Area2D" parent="." unique_id=1367607637 instance=ExtResource("5_m6mf6")]
+position = Vector2(1416, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@22" type="Area2D" parent="." unique_id=1483809930 instance=ExtResource("5_m6mf6")]
+position = Vector2(1432, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@23" type="Area2D" parent="." unique_id=1111669458 instance=ExtResource("5_m6mf6")]
+position = Vector2(1448, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@24" type="Area2D" parent="." unique_id=1259204654 instance=ExtResource("5_m6mf6")]
+position = Vector2(1464, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@25" type="Area2D" parent="." unique_id=1507732949 instance=ExtResource("5_m6mf6")]
+position = Vector2(1848, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@26" type="Area2D" parent="." unique_id=2123159472 instance=ExtResource("5_m6mf6")]
+position = Vector2(1864, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@27" type="Area2D" parent="." unique_id=689200770 instance=ExtResource("5_m6mf6")]
+position = Vector2(1880, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@28" type="Area2D" parent="." unique_id=575601840 instance=ExtResource("5_m6mf6")]
+position = Vector2(1896, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@29" type="Area2D" parent="." unique_id=201199966 instance=ExtResource("5_m6mf6")]
+position = Vector2(264, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@30" type="Area2D" parent="." unique_id=97343988 instance=ExtResource("5_m6mf6")]
+position = Vector2(280, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@31" type="Area2D" parent="." unique_id=1746638248 instance=ExtResource("5_m6mf6")]
+position = Vector2(296, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@32" type="Area2D" parent="." unique_id=1077932248 instance=ExtResource("5_m6mf6")]
+position = Vector2(648, 56)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@33" type="Area2D" parent="." unique_id=175673976 instance=ExtResource("5_m6mf6")]
+position = Vector2(664, 56)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@34" type="Area2D" parent="." unique_id=37940749 instance=ExtResource("5_m6mf6")]
+position = Vector2(680, 56)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@35" type="Area2D" parent="." unique_id=1906546027 instance=ExtResource("5_m6mf6")]
+position = Vector2(696, 56)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@36" type="Area2D" parent="." unique_id=924215301 instance=ExtResource("5_m6mf6")]
+position = Vector2(1000, 104)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@37" type="Area2D" parent="." unique_id=795270982 instance=ExtResource("5_m6mf6")]
+position = Vector2(1016, 104)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@38" type="Area2D" parent="." unique_id=83845173 instance=ExtResource("5_m6mf6")]
+position = Vector2(1032, 104)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@39" type="Area2D" parent="." unique_id=964833088 instance=ExtResource("5_m6mf6")]
+position = Vector2(1048, 104)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@40" type="Area2D" parent="." unique_id=609116964 instance=ExtResource("5_m6mf6")]
+position = Vector2(1256, 72)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@41" type="Area2D" parent="." unique_id=466777674 instance=ExtResource("5_m6mf6")]
+position = Vector2(1272, 72)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@42" type="Area2D" parent="." unique_id=333856399 instance=ExtResource("5_m6mf6")]
+position = Vector2(1288, 72)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@43" type="Area2D" parent="." unique_id=757727201 instance=ExtResource("5_m6mf6")]
+position = Vector2(1304, 72)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@44" type="Area2D" parent="." unique_id=460206322 instance=ExtResource("5_m6mf6")]
+position = Vector2(1608, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@45" type="Area2D" parent="." unique_id=1029048554 instance=ExtResource("5_m6mf6")]
+position = Vector2(1624, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@46" type="Area2D" parent="." unique_id=350834540 instance=ExtResource("5_m6mf6")]
+position = Vector2(1640, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@47" type="Area2D" parent="." unique_id=442717807 instance=ExtResource("5_m6mf6")]
+position = Vector2(1656, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@48" type="Area2D" parent="." unique_id=37816641 instance=ExtResource("5_m6mf6")]
+position = Vector2(1992, 56)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@49" type="Area2D" parent="." unique_id=1722014341 instance=ExtResource("5_m6mf6")]
+position = Vector2(2008, 56)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@50" type="Area2D" parent="." unique_id=1549524037 instance=ExtResource("5_m6mf6")]
+position = Vector2(2024, 56)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@51" type="Area2D" parent="." unique_id=1063504891 instance=ExtResource("5_m6mf6")]
+position = Vector2(2040, 56)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@52" type="Area2D" parent="." unique_id=1770962417 instance=ExtResource("5_m6mf6")]
+position = Vector2(2248, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@53" type="Area2D" parent="." unique_id=863536550 instance=ExtResource("5_m6mf6")]
+position = Vector2(2264, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@54" type="Area2D" parent="." unique_id=536502851 instance=ExtResource("5_m6mf6")]
+position = Vector2(2280, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="@Area2D@55" type="Area2D" parent="." unique_id=209930798 instance=ExtResource("5_m6mf6")]
+position = Vector2(2296, 88)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_gncv8")
+
+[node name="Slime" type="CharacterBody2D" parent="." unique_id=267652912 instance=ExtResource("7_lg1gw")]
+position = Vector2(200, 146)
+collision_layer = 4
+script = ExtResource("8_cdpp2")
+
+[node name="@CharacterBody2D@56" type="CharacterBody2D" parent="." unique_id=2018082215 instance=ExtResource("7_lg1gw")]
+position = Vector2(552, 146)
+collision_layer = 4
+script = ExtResource("8_cdpp2")
+
+[node name="@CharacterBody2D@57" type="CharacterBody2D" parent="." unique_id=1707567690 instance=ExtResource("7_lg1gw")]
+position = Vector2(968, 146)
+collision_layer = 4
+script = ExtResource("8_cdpp2")
+
+[node name="@CharacterBody2D@58" type="CharacterBody2D" parent="." unique_id=677708542 instance=ExtResource("7_lg1gw")]
+position = Vector2(1352, 146)
+collision_layer = 4
+script = ExtResource("8_cdpp2")
+
+[node name="@CharacterBody2D@59" type="CharacterBody2D" parent="." unique_id=845265607 instance=ExtResource("7_lg1gw")]
+position = Vector2(1768, 146)
+collision_layer = 4
+script = ExtResource("8_cdpp2")
+
+[node name="@CharacterBody2D@60" type="CharacterBody2D" parent="." unique_id=973193079 instance=ExtResource("7_lg1gw")]
+position = Vector2(2168, 146)
+collision_layer = 4
+script = ExtResource("8_cdpp2")
+
+[node name="Bee" type="CharacterBody2D" parent="." unique_id=214289495 instance=ExtResource("9_r0p21")]
+position = Vector2(360, 86)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_rka7j")
+speed = 30.0
+range_px = 40.0
+bob_height = 11.0
+bob_speed = 2.4
+
+[node name="@CharacterBody2D@61" type="CharacterBody2D" parent="." unique_id=1833208437 instance=ExtResource("9_r0p21")]
+position = Vector2(728, 112)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_rka7j")
+speed = 56.0
+range_px = 72.0
+bob_height = 5.0
+bob_speed = 3.6
+
+[node name="@CharacterBody2D@62" type="CharacterBody2D" parent="." unique_id=1353416393 instance=ExtResource("9_r0p21")]
+position = Vector2(1128, 70)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_rka7j")
+speed = 44.0
+range_px = 52.0
+bob_height = 15.0
+bob_speed = 2.0
+
+[node name="@CharacterBody2D@63" type="CharacterBody2D" parent="." unique_id=290441681 instance=ExtResource("9_r0p21")]
+position = Vector2(1528, 98)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_rka7j")
+speed = 66.0
+range_px = 60.0
+bob_height = 7.0
+bob_speed = 4.2
+
+[node name="@CharacterBody2D@64" type="CharacterBody2D" parent="." unique_id=1135741691 instance=ExtResource("9_r0p21")]
+position = Vector2(1928, 80)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_rka7j")
+speed = 36.0
+range_px = 46.0
+bob_height = 12.0
+
+[node name="Boss" type="CharacterBody2D" parent="." unique_id=233698961 instance=ExtResource("11_wd3mt")]
+position = Vector2(2328, 120)
+collision_layer = 4
+script = ExtResource("12_taidm")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=2110784419 instance=ExtResource("13_sqbaw")]
+position = Vector2(40, 130)
+collision_layer = 2
+script = ExtResource("14_0nkdp")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1374191841]
+limit_left = 0
+limit_top = 0
+limit_right = 2400
+limit_bottom = 180
+position_smoothing_enabled = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=2062863120 instance=ExtResource("15_dm773")]
+script = ExtResource("16_c3hv2")
+
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=878031147 instance=ExtResource("17_31kg7")]
+layer = 10
+script = ExtResource("18_i32b7")
+
+[node name="Victory" type="CanvasLayer" parent="." unique_id=665058639 instance=ExtResource("19_ae38f")]
+layer = 20
+script = ExtResource("20_pj2go")

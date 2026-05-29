@@ -1,7 +1,7 @@
 extends Node
 ## Leaderboard with a local cache and an optional SilentWolf online backend.
 ##
-## A "run" is one life; its score is the coins collected before dying. Runs are
+## A "run" is one life; its score (coins + kills + level bonuses) is submitted. Runs are
 ## always cached locally (so the High Scores screen works offline). They are ALSO
 ## posted to / fetched from SilentWolf once you go online.
 ##

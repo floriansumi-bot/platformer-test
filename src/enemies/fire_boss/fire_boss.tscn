@@ -1,0 +1,61 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/enemies/boss/boss.gd" id="1_48tax"]
+[ext_resource type="SpriteFrames" path="res://src/enemies/fire_boss/fireboss_frames.tres" id="2_4blv6"]
+[ext_resource type="Script" path="res://src/components/hitbox.gd" id="3_nsykl"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="4_uxwrs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3lqp"]
+size = Vector2(16, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqbd3"]
+size = Vector2(16, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rl5ji"]
+size = Vector2(24, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bf688"]
+size = Vector2(260, 160)
+
+[node name="FireBoss" type="CharacterBody2D" unique_id=1289816065]
+collision_layer = 4
+script = ExtResource("1_48tax")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=641685204]
+scale = Vector2(1.3, 1.3)
+sprite_frames = ExtResource("2_4blv6")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="@CollisionShape2D@11" type="CollisionShape2D" parent="." unique_id=693523037]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_n3lqp")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=2082609134]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_nsykl")
+
+[node name="@CollisionShape2D@12" type="CollisionShape2D" parent="Hitbox" unique_id=1250044249]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_rqbd3")
+
+[node name="StompBox" type="Area2D" parent="." unique_id=334431719]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_uxwrs")
+
+[node name="@CollisionShape2D@13" type="CollisionShape2D" parent="StompBox" unique_id=261786860]
+position = Vector2(0, -22)
+shape = SubResource("RectangleShape2D_rl5ji")
+
+[node name="HopTimer" type="Timer" parent="." unique_id=286864770]
+wait_time = 1.4
+
+[node name="DetectionZone" type="Area2D" parent="." unique_id=1417830548]
+collision_layer = 0
+collision_mask = 2
+
+[node name="@CollisionShape2D@14" type="CollisionShape2D" parent="DetectionZone" unique_id=1278833012]
+shape = SubResource("RectangleShape2D_bf688")

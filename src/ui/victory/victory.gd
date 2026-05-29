@@ -15,9 +15,9 @@ func _ready() -> void:
 
 
 func _on_win() -> void:
-	Leaderboard.submit_run(GameManager.coins)
+	Leaderboard.submit_run(GameManager.score)
 	await get_tree().create_timer(0.6).timeout   # let the boss death animation play
-	coins_label.text = "Coins: %d" % GameManager.coins
+	coins_label.text = "Score: %d" % GameManager.score
 	get_tree().paused = true
 	panel.visible = true
 	$Panel/Center/VBox/Retry.grab_focus()

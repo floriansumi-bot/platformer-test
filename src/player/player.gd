@@ -66,9 +66,9 @@ func _die() -> void:
 	state_machine.set_physics_process(false)
 	velocity = Vector2.ZERO
 	AudioManager.play_sfx(DEATH_SFX)
-	# Submit the run (coins collected this life) to the leaderboard before the reset.
-	if GameManager.coins > 0:
-		Leaderboard.submit_run(GameManager.coins)
+	# Submit the run's score to the leaderboard before the reset.
+	if GameManager.score > 0:
+		Leaderboard.submit_run(GameManager.score)
 	GameManager.register_death()
 	await get_tree().create_timer(0.8).timeout
 	get_tree().reload_current_scene()

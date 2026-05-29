@@ -28,7 +28,7 @@ func _on_body_entered(body: Node2D) -> void:
 	# Autoloads reached by path so the scene also builds in headless tooling.
 	var gm := get_node_or_null(^"/root/GameManager")
 	if gm != null:
-		gm.add_coins(value)
+		gm.add_score(value)
 	var am := get_node_or_null(^"/root/AudioManager")
 	if am != null:
 		am.play_sfx(PICKUP_SFX)

@@ -1,0 +1,56 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/textures/fire_elemental.png" id="1_ey637"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd4p7"]
+atlas = ExtResource("1_ey637")
+region = Rect2(0, 0, 64, 64)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uif3t"]
+atlas = ExtResource("1_ey637")
+region = Rect2(0, 0, 64, 64)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlhwh"]
+atlas = ExtResource("1_ey637")
+region = Rect2(64, 0, 64, 64)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i0en"]
+atlas = ExtResource("1_ey637")
+region = Rect2(128, 0, 64, 64)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01nbx"]
+atlas = ExtResource("1_ey637")
+region = Rect2(192, 0, 64, 64)
+filter_clip = true
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cd4p7")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uif3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlhwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0i0en")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01nbx")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]

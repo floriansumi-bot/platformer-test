@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/enemies/bee/bee.gd" id="1_ovq2d"]
+[ext_resource type="SpriteFrames" path="res://src/enemies/bee/bee_frames.tres" id="2_nlgny"]
+[ext_resource type="Script" path="res://src/components/hitbox.gd" id="3_ovgrc"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="4_wrdt5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e8kf"]
+size = Vector2(8, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgtyi"]
+size = Vector2(9, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_444mm"]
+size = Vector2(16, 8)
+
+[node name="Bee" type="CharacterBody2D" unique_id=214289495]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_ovq2d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1263758773]
+scale = Vector2(0.4, 0.4)
+sprite_frames = ExtResource("2_nlgny")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="@CollisionShape2D@11" type="CollisionShape2D" parent="." unique_id=791705830]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_0e8kf")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1818027798]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_ovgrc")
+
+[node name="@CollisionShape2D@12" type="CollisionShape2D" parent="Hitbox" unique_id=202541612]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_rgtyi")
+
+[node name="StompBox" type="Area2D" parent="." unique_id=1099903405]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_wrdt5")
+
+[node name="@CollisionShape2D@13" type="CollisionShape2D" parent="StompBox" unique_id=897149476]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_444mm")
