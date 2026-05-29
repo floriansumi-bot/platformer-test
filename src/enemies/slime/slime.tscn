@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/enemies/slime/slime.gd" id="1_q006h"]
+[ext_resource type="SpriteFrames" path="res://src/enemies/slime/slime_frames.tres" id="2_axjb1"]
+[ext_resource type="Script" path="res://src/components/hitbox.gd" id="3_ty3o2"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="4_5qjie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rafbb"]
+size = Vector2(13, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0n2y8"]
+size = Vector2(13, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbe6v"]
+size = Vector2(13, 4)
+
+[node name="Slime" type="CharacterBody2D" unique_id=267652912]
+collision_layer = 4
+script = ExtResource("1_q006h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1775542218]
+sprite_frames = ExtResource("2_axjb1")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="@CollisionShape2D@2" type="CollisionShape2D" parent="." unique_id=748649675]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_rafbb")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1789757979]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_ty3o2")
+
+[node name="@CollisionShape2D@3" type="CollisionShape2D" parent="Hitbox" unique_id=1610340989]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_0n2y8")
+
+[node name="StompBox" type="Area2D" parent="." unique_id=2021702221]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_5qjie")
+
+[node name="@CollisionShape2D@4" type="CollisionShape2D" parent="StompBox" unique_id=723209113]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_fbe6v")
+
+[node name="GroundRay" type="RayCast2D" parent="." unique_id=1472695699]
+position = Vector2(6, 6)
+target_position = Vector2(0, 10)
+
+[node name="WallRay" type="RayCast2D" parent="." unique_id=1398727276]
+position = Vector2(0, 4)
+target_position = Vector2(10, 0)

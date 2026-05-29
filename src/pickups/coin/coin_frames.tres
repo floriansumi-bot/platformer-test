@@ -1,0 +1,107 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/pixelart/medieval tutorial 2d pixelart/sprites/coin.png" id="1_3hnmc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4w2n"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(0, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mpj2"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(16, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhwta"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(32, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saco6"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(48, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b13r3"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(64, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5saj"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(80, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7ign"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(96, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gb7i"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(112, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10jci"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(128, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0prlp"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(144, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq7co"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(160, 0, 16, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gugfd"]
+atlas = ExtResource("1_3hnmc")
+region = Rect2(176, 0, 16, 16)
+filter_clip = true
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4w2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mpj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhwta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saco6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b13r3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5saj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7ign")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gb7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10jci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0prlp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq7co")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gugfd")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 12.0
+}]

@@ -4,6 +4,8 @@
 class_name Player
 extends CharacterBody2D
 
+const DEATH_SFX: AudioStream = preload("res://assets/pixelart/medieval tutorial 2d pixelart/sounds/explosion.wav")
+
 @export_group("Movement")
 ## Top horizontal speed in px/s.
 @export var speed: float = 150.0
@@ -24,16 +26,48 @@ extends CharacterBody2D
 ## Extra mid-air jumps. 0 = single jump, 1 = double jump, 2 = triple, ...
 @export var max_air_jumps: int = 1
 
+@export_group("Combat")
+## Upward velocity gained from stomping an enemy.
+@export var stomp_bounce: float = -260.0
+## Seconds of invulnerability after taking a hit.
+@export var invuln_time: float = 0.8
+
 var air_jumps_left: int = 0
+var invincible: bool = false
+var dying: bool = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
 @onready var state_machine: StateMachine = $StateMachine
+@onready var hurtbox: Hurtbox = $Hurtbox   # takes damage from enemy Hitboxes
+@onready var feet: Area2D = $Feet          # detects stompable enemy tops
 
 
 func _ready() -> void:
 	air_jumps_left = max_air_jumps
+	hurtbox.hurt.connect(_on_hurt)
+	feet.area_entered.connect(_on_feet_area_entered)
+
+
+func _process(_delta: float) -> void:
+	# Fell into a pit — die (then respawn after a short pause).
+	if global_position.y > 400.0:
+		_die()
+
+
+## Freeze, play the death sound, count the death, then reload after a short delay.
+func _die() -> void:
+	if dying:
+		return
+	dying = true
+	invincible = true
+	state_machine.set_physics_process(false)
+	velocity = Vector2.ZERO
+	AudioManager.play_sfx(DEATH_SFX)
+	GameManager.register_death()
+	await get_tree().create_timer(0.8).timeout
+	get_tree().reload_current_scene()
 
 
 # --- Movement helpers (called by the FSM states) ---------------------------
@@ -103,3 +137,43 @@ func reset_air_jumps() -> void:
 func play_anim(anim: StringName) -> void:
 	if sprite.animation != anim or not sprite.is_playing():
 		sprite.play(anim)
+
+
+# --- Combat ----------------------------------------------------------------
+
+## Feet overlapped something on the enemy-stomp layer. Only count it as a stomp
+## while descending — side contact is handled by the enemy's Hitbox instead.
+func _on_feet_area_entered(area: Area2D) -> void:
+	if velocity.y > 0.0 and area is Hurtbox:
+		(area as Hurtbox).take_hit(10)   # kill the stomped enemy
+		velocity.y = stomp_bounce
+		_grace(0.25)                      # brief i-frames so the dying enemy can't also hit us
+
+
+## Enemy Hitbox struck our Hurtbox.
+func _on_hurt(_amount: int) -> void:
+	if invincible:
+		return
+	GameManager.apply_damage(1)
+	if GameManager.health <= 0:
+		_die()
+		return
+	velocity.y = -160.0   # small recoil pop
+	_flash()
+	_grace(invuln_time)
+
+
+## Run invulnerability for `seconds`, unless a longer window is already active.
+func _grace(seconds: float) -> void:
+	if invincible:
+		return
+	invincible = true
+	await get_tree().create_timer(seconds).timeout
+	invincible = false
+	sprite.modulate.a = 1.0
+
+
+func _flash() -> void:
+	var tw := create_tween().set_loops(4)
+	tw.tween_property(sprite, "modulate:a", 0.25, 0.1)
+	tw.tween_property(sprite, "modulate:a", 1.0, 0.1)

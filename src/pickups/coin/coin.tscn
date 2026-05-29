@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/pickups/coin/coin.gd" id="1_pyk57"]
+[ext_resource type="SpriteFrames" path="res://src/pickups/coin/coin_frames.tres" id="2_hni8x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ijcp"]
+size = Vector2(10, 12)
+
+[node name="Coin" type="Area2D" unique_id=1211580452]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_pyk57")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=168452881]
+sprite_frames = ExtResource("2_hni8x")
+animation = &"spin"
+autoplay = "spin"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1972104333]
+shape = SubResource("RectangleShape2D_8ijcp")
