@@ -44,8 +44,9 @@ var dying: bool = false
 var speed_mult: float = 1.0   # banana slows to 0.5
 var jump_mult: float = 1.0    # super boots raise to 1.7
 var shield_hits: int = 0      # absorbs this many hits before real damage
-var wand_active: bool = false # supernova-spawning loop running
-var attacking: bool = false   # a sword swing is in progress
+var wand_active: bool = false   # wand powerup charged — the wand button casts a supernova
+var attacking: bool = false     # a sword swing is in progress
+var _wand_cooldown: float = 0.0 # min seconds between wand casts
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var coyote_timer: Timer = $CoyoteTimer
@@ -62,13 +63,21 @@ func _ready() -> void:
 	feet.area_entered.connect(_on_feet_area_entered)
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	# Fell into a pit — die (then respawn after a short pause).
 	if global_position.y > 400.0:
 		_die()
-	# Sword swing on the dedicated attack button (X / gamepad Y).
-	if not dying and not attacking and Input.is_action_just_pressed("attack"):
+	if dying:
+		return
+	# Sword swing on the attack button (X key / gamepad X).
+	if not attacking and Input.is_action_just_pressed("attack"):
 		_swing_sword()
+	# Wand: while the powerup is charged, cast a supernova on the wand button
+	# (Y key / gamepad Y), rate-limited by a short cooldown.
+	_wand_cooldown = maxf(0.0, _wand_cooldown - delta)
+	if wand_active and _wand_cooldown <= 0.0 and Input.is_action_just_pressed("wand"):
+		_spawn_supernova()
+		_wand_cooldown = 0.6
 
 
 ## Freeze, play the death sound, count the death, then reload after a short delay.
@@ -289,8 +298,9 @@ func apply_powerup(kind: String) -> void:
 			shield_hits = 2
 			_revert_after(func(): shield_hits = 0, 30.0)
 		"wand":
-			if not wand_active:
-				_wand_loop()
+			# Charge the wand for 12s; the player casts supernovas with the wand button.
+			wand_active = true
+			_revert_after(func(): wand_active = false, 12.0)
 		"banana":
 			speed_mult = 0.5
 			_revert_after(func(): speed_mult = 1.0, 5.0)
@@ -303,17 +313,6 @@ func _revert_after(revert: Callable, seconds: float) -> void:
 	await get_tree().create_timer(seconds).timeout
 	if is_instance_valid(self):
 		revert.call()
-
-
-## Wand: fire a supernova every ~1.8 s for 12 s.
-func _wand_loop() -> void:
-	wand_active = true
-	var elapsed := 0.0
-	while elapsed < 12.0 and not dying and is_instance_valid(self):
-		_spawn_supernova()
-		await get_tree().create_timer(1.8).timeout
-		elapsed += 1.8
-	wand_active = false
 
 
 func _spawn_supernova() -> void:

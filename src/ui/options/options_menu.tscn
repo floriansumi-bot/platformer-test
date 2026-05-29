@@ -96,7 +96,12 @@ custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 max_length = 16
 
+[node name="Confirm" type="Button" parent="Center/VBox"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Confirm"
+
 [node name="Back" type="Button" parent="Center/VBox"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "Back"
+text = "Cancel"
