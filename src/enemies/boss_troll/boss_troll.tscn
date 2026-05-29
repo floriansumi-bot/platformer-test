@@ -1,0 +1,111 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/enemies/boss_troll/slammer_boss.gd" id="1_gwxnv"]
+[ext_resource type="Texture2D" path="res://assets/textures/troll.png" id="2_nrc7c"]
+[ext_resource type="Script" path="res://src/components/hitbox.gd" id="3_26og4"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="4_fke0y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_samwh"]
+atlas = ExtResource("2_nrc7c")
+region = Rect2(0, 0, 64, 64)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuwd8"]
+atlas = ExtResource("2_nrc7c")
+region = Rect2(0, 0, 64, 64)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqigu"]
+atlas = ExtResource("2_nrc7c")
+region = Rect2(64, 0, 64, 64)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hku6e"]
+atlas = ExtResource("2_nrc7c")
+region = Rect2(128, 0, 64, 64)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2grqy"]
+atlas = ExtResource("2_nrc7c")
+region = Rect2(192, 0, 64, 64)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w4u0v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_samwh")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uuwd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqigu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hku6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2grqy")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lvv8s"]
+size = Vector2(22, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdp3d"]
+size = Vector2(22, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gomxb"]
+size = Vector2(32, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e68kl"]
+size = Vector2(320, 190)
+
+[node name="Boss" type="CharacterBody2D" unique_id=318202855]
+collision_layer = 4
+script = ExtResource("1_gwxnv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2033309015]
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_w4u0v")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="@CollisionShape2D@24" type="CollisionShape2D" parent="." unique_id=1035103256]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_lvv8s")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=663961181]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_26og4")
+
+[node name="@CollisionShape2D@25" type="CollisionShape2D" parent="Hitbox" unique_id=1690578029]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_wdp3d")
+
+[node name="StompBox" type="Area2D" parent="." unique_id=1774702429]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_fke0y")
+
+[node name="@CollisionShape2D@26" type="CollisionShape2D" parent="StompBox" unique_id=1864117395]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_gomxb")
+
+[node name="DetectionZone" type="Area2D" parent="." unique_id=664976943]
+collision_layer = 0
+collision_mask = 2
+
+[node name="@CollisionShape2D@27" type="CollisionShape2D" parent="DetectionZone" unique_id=102939435]
+shape = SubResource("RectangleShape2D_e68kl")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://src/ui/cutscene/cutscene.tscn" id="1"]
+
+[node name="Cutscene" instance=ExtResource("1")]
+lines = Array[String](["Big troll, big leap, very small landing options. Gravity always collects its debt - with interest."])
+next_scene = "res://src/levels/level_05.tscn"

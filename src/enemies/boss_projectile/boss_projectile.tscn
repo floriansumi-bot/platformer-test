@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/enemies/boss_projectile/boss_projectile.gd" id="1_coe01"]
+[ext_resource type="Texture2D" path="res://assets/textures/orb.png" id="2_a61hc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_no0e1"]
+radius = 4.0
+
+[node name="BossProjectile" type="Area2D" unique_id=2121298128]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_coe01")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=334766297]
+texture = ExtResource("2_a61hc")
+
+[node name="@CollisionShape2D@11" type="CollisionShape2D" parent="." unique_id=1704875728]
+shape = SubResource("CircleShape2D_no0e1")

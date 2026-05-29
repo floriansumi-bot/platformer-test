@@ -1,12 +1,12 @@
 extends Control
-## Between-levels cutscene: the knight delivers a few lines (typewriter reveal),
-## then it loads the next level. Advance / skip-reveal with Jump, Enter, or click.
+## Reusable between-levels cutscene: the knight delivers `lines` (typewriter reveal),
+## then loads `next_scene`. Advance / skip-reveal with Jump, Enter, or click.
+## Each cutscene_N.tscn inherits this scene and sets its own lines + next_scene.
 
-const NEXT_SCENE := "res://src/levels/level_02.tscn"
+@export var lines: Array[String] = ["..."]
+@export_file("*.tscn") var next_scene: String = ""
+
 const CHARS_PER_SEC := 28.0
-const LINES := [
-	"Came to hell for the climate, stayed for the people.",
-]
 
 @onready var text: Label = $Box/Text
 @onready var prompt: Label = $Box/Prompt
@@ -20,7 +20,10 @@ func _ready() -> void:
 
 
 func _show_line() -> void:
-	text.text = LINES[_line]
+	if lines.is_empty():
+		_finish()
+		return
+	text.text = lines[_line]
 	text.visible_ratio = 0.0
 	_t = 0.0
 	prompt.visible = false
@@ -35,19 +38,24 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	var advance := event.is_action_pressed("jump") or event.is_action_pressed("ui_accept")
-	advance = advance or (event is InputEventMouseButton and event.pressed)
-	if advance:
+	var adv := event.is_action_pressed("jump") or event.is_action_pressed("ui_accept")
+	adv = adv or (event is InputEventMouseButton and event.pressed)
+	if adv:
 		_advance()
 
 
 func _advance() -> void:
 	if text.visible_ratio < 1.0:
-		text.visible_ratio = 1.0   # reveal the rest instantly
+		text.visible_ratio = 1.0
 		prompt.visible = true
 		return
 	_line += 1
-	if _line >= LINES.size():
-		SceneTransitioner.change_scene(NEXT_SCENE)
+	if _line >= lines.size():
+		_finish()
 	else:
 		_show_line()
+
+
+func _finish() -> void:
+	if not next_scene.is_empty():
+		SceneTransitioner.change_scene(next_scene)

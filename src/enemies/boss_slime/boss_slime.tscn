@@ -1,0 +1,143 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/enemies/boss_slime/slime_boss.gd" id="1_i1cuo"]
+[ext_resource type="Texture2D" path="res://assets/pixelart/medieval tutorial 2d pixelart/sprites/slime_purple.png" id="2_ac5xl"]
+[ext_resource type="Script" path="res://src/components/hitbox.gd" id="3_pbswf"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="4_16nbk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvlb1"]
+atlas = ExtResource("2_ac5xl")
+region = Rect2(48, 48, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j54r5"]
+atlas = ExtResource("2_ac5xl")
+region = Rect2(0, 0, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrh8p"]
+atlas = ExtResource("2_ac5xl")
+region = Rect2(24, 0, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0muu"]
+atlas = ExtResource("2_ac5xl")
+region = Rect2(48, 0, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umd7e"]
+atlas = ExtResource("2_ac5xl")
+region = Rect2(72, 0, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v513y"]
+atlas = ExtResource("2_ac5xl")
+region = Rect2(0, 24, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18b56"]
+atlas = ExtResource("2_ac5xl")
+region = Rect2(24, 24, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5g7jt"]
+atlas = ExtResource("2_ac5xl")
+region = Rect2(48, 24, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj5ig"]
+atlas = ExtResource("2_ac5xl")
+region = Rect2(72, 24, 24, 24)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_331ld"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvlb1")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j54r5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrh8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0muu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umd7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v513y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18b56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5g7jt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj5ig")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d8gu"]
+size = Vector2(30, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y56rb"]
+size = Vector2(28, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttjmj"]
+size = Vector2(30, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmub0"]
+size = Vector2(240, 120)
+
+[node name="Boss" type="CharacterBody2D" unique_id=1874937111]
+collision_layer = 4
+script = ExtResource("1_i1cuo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=113463372]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_331ld")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="@CollisionShape2D@12" type="CollisionShape2D" parent="." unique_id=538541963]
+position = Vector2(0, 17)
+shape = SubResource("RectangleShape2D_2d8gu")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1994529311]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_pbswf")
+
+[node name="@CollisionShape2D@13" type="CollisionShape2D" parent="Hitbox" unique_id=1519500821]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_y56rb")
+
+[node name="StompBox" type="Area2D" parent="." unique_id=2032391617]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_16nbk")
+
+[node name="@CollisionShape2D@14" type="CollisionShape2D" parent="StompBox" unique_id=1857904267]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_ttjmj")
+
+[node name="DetectionZone" type="Area2D" parent="." unique_id=1319463613]
+collision_layer = 0
+collision_mask = 2
+
+[node name="@CollisionShape2D@15" type="CollisionShape2D" parent="DetectionZone" unique_id=1383635152]
+shape = SubResource("RectangleShape2D_wmub0")
