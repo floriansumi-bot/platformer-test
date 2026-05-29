@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://kj4pkxbtvrmm"]
+
+[ext_resource type="Script" uid="uid://cu8mm60xtp2ah" path="res://src/player/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://df8gidhjwwfd0" path="res://src/player/states/state_machine.gd" id="2_sm"]
+[ext_resource type="Script" uid="uid://dij8tfrp45jl4" path="res://src/player/states/idle.gd" id="3_idle"]
+[ext_resource type="Script" uid="uid://cxm2216mlyd0o" path="res://src/player/states/run.gd" id="4_run"]
+[ext_resource type="Script" uid="uid://cfxl45d2wgymy" path="res://src/player/states/jump.gd" id="5_jump"]
+[ext_resource type="Script" uid="uid://cwndt7f3p8wu3" path="res://src/player/states/fall.gd" id="6_fall"]
+[ext_resource type="SpriteFrames" path="res://src/player/player_frames.tres" id="7_frames"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(12, 22)
+
+[node name="Player" type="CharacterBody2D" unique_id=2110784419]
+script = ExtResource("1_player")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=952123751]
+position = Vector2(1, 0)
+sprite_frames = ExtResource("7_frames")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=759843144]
+shape = SubResource("RectangleShape2D_body")
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=1411806503]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="." unique_id=518840675]
+wait_time = 0.15
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="." unique_id=916525981 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_sm")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1637777685]
+script = ExtResource("3_idle")
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=724816132]
+script = ExtResource("4_run")
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=1710780890]
+script = ExtResource("5_jump")
+
+[node name="Fall" type="Node" parent="StateMachine" unique_id=474599874]
+script = ExtResource("6_fall")

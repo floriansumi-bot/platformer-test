@@ -1,0 +1,34 @@
+# Godot 4+ .gitignore
+
+# Godot-generated import/cache folders
+.godot/
+.import/
+
+# Mono/C# build artifacts (harmless if GDScript-only)
+.mono/
+data_*/
+mono_crash.*.json
+
+# Exported builds
+build/
+export/
+*.exe
+*.pck
+*.zip
+
+# Editor / OS noise
+*.translation
+.DS_Store
+Thumbs.db
+
+# IMPORTANT: keep .uid files — they anchor resource references in Godot 4.4+
+!*.uid
+
+# Bundled third-party asset packs — keep only the medieval set (the chosen art
+# direction; the other downloaded packs stay local and out of the repo).
+assets/pixelart/*
+!assets/pixelart/medieval tutorial 2d pixelart/
+
+# Local Claude Code tooling / research notes — not part of the game itself.
+.claude/
+GODOT_SKILLS_PLAN.md

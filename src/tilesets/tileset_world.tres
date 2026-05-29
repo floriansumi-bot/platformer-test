@@ -1,0 +1,20 @@
+[gd_resource type="TileSet" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/pixelart/medieval tutorial 2d pixelart/sprites/world_tileset.png" id="1_etv0p"]
+[ext_resource type="Texture2D" path="res://assets/pixelart/medieval tutorial 2d pixelart/sprites/platforms.png" id="2_bi141"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7njo3"]
+texture = ExtResource("1_etv0p")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qsw57"]
+texture = ExtResource("2_bi141")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -6, -8, -6)
+0:0/0/physics_layer_0/polygon_0/one_way = true
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_7njo3")
+sources/1 = SubResource("TileSetAtlasSource_qsw57")

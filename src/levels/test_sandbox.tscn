@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bf8tb64ngad0x"]
+
+[ext_resource type="PackedScene" uid="uid://kj4pkxbtvrmm" path="res://src/player/player.tscn" id="1_player"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(400, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_a"]
+size = Vector2(60, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_b"]
+size = Vector2(40, 12)
+
+[node name="TestSandbox" type="Node2D" unique_id=1062593449]
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=21092665]
+position = Vector2(160, 168)
+
+[node name="Visual" type="Polygon2D" parent="Floor" unique_id=1990267855]
+color = Color(0.4, 0.3, 0.25, 1)
+polygon = PackedVector2Array(-200, -12, 200, -12, 200, 12, -200, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1051999545]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="PlatformA" type="StaticBody2D" parent="." unique_id=1090727803]
+position = Vector2(225, 132)
+
+[node name="Visual" type="Polygon2D" parent="PlatformA" unique_id=1945809236]
+color = Color(0.55, 0.55, 0.6, 1)
+polygon = PackedVector2Array(-30, -6, 30, -6, 30, 6, -30, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformA" unique_id=84218100]
+shape = SubResource("RectangleShape2D_plat_a")
+
+[node name="PlatformB" type="StaticBody2D" parent="." unique_id=244219507]
+position = Vector2(110, 108)
+
+[node name="Visual" type="Polygon2D" parent="PlatformB" unique_id=109795661]
+color = Color(0.55, 0.55, 0.6, 1)
+polygon = PackedVector2Array(-20, -6, 20, -6, 20, 6, -20, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformB" unique_id=576988069]
+shape = SubResource("RectangleShape2D_plat_b")
+
+[node name="Player" parent="." unique_id=131623001 instance=ExtResource("1_player")]
+position = Vector2(80, 40)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1935143091]
+position = Vector2(80, 50)

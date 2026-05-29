@@ -1,0 +1,27 @@
+[gd_scene format=4]
+
+[ext_resource type="TileSet" path="res://src/tilesets/tileset_world.tres" id="1_0yg4g"]
+[ext_resource type="PackedScene" path="res://src/player/player.tscn" id="2_07edn"]
+[ext_resource type="Script" path="res://src/player/player.gd" id="3_yqmen"]
+
+[node name="Level01" type="Node2D" unique_id=951987638]
+
+[node name="Terrain" type="TileMapLayer" parent="." unique_id=1032339908]
+tile_map_data = PackedByteArray("AAAAAAoAAAAAAAAAAAABAAoAAAAAAAAAAAACAAoAAAAAAAAAAAADAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAALAAoAAAAAAAAAAAAMAAoAAAAAAAAAAAANAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAAPAAoAAAAAAAAAAAAQAAoAAAAAAAAAAAARAAoAAAAAAAAAAAASAAoAAAAAAAAAAAATAAoAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAMAAQAAAAAAAAAAAANAAQAAAAAAAAAAAAOAAQAAAAAAAAAAAAPAAQAAAAAAAAAAAA=")
+tile_set = ExtResource("1_0yg4g")
+
+[node name="OneWayPlatforms" type="TileMapLayer" parent="." unique_id=1402790968]
+tile_map_data = PackedByteArray("AAAIAAcAAQAAAAAAAAAJAAcAAQAAAAAAAAAKAAcAAQAAAAAAAAALAAcAAQAAAAAAAAA=")
+tile_set = ExtResource("1_0yg4g")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=2110784419 instance=ExtResource("2_07edn")]
+position = Vector2(40, 140)
+script = ExtResource("3_yqmen")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1742031889]
+position = Vector2(160, 90)
+limit_left = 0
+limit_top = 0
+limit_right = 320
+limit_bottom = 180
+position_smoothing_enabled = true
