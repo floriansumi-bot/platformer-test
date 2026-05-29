@@ -71,7 +71,21 @@ func _die() -> void:
 		Leaderboard.submit_run(GameManager.score)
 	GameManager.register_death()
 	await get_tree().create_timer(0.8).timeout
-	get_tree().reload_current_scene()
+	SceneTransitioner.change_scene(_previous_level_path())
+
+
+## On death, drop back to the previous level (level 1 just restarts).
+func _previous_level_path() -> String:
+	var path := get_tree().current_scene.scene_file_path if get_tree().current_scene else ""
+	var idx := _level_index(path)
+	if idx > 1:
+		return "res://src/levels/level_%02d.tscn" % (idx - 1)
+	return path if path != "" else "res://src/levels/level_01.tscn"
+
+
+func _level_index(path: String) -> int:
+	var n := path.get_file().trim_prefix("level_").trim_suffix(".tscn")
+	return int(n) if n.is_valid_int() else 0
 
 
 # --- Movement helpers (called by the FSM states) ---------------------------

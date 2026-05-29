@@ -31,5 +31,5 @@ func _on_body_entered(body: Node2D) -> void:
 		gm.add_score(value)
 	var am := get_node_or_null(^"/root/AudioManager")
 	if am != null:
-		am.play_sfx(PICKUP_SFX)
+		am.play_sfx(PICKUP_SFX, -12.0)   # coin blip is quieter than other SFX
 	queue_free()

@@ -20,6 +20,10 @@
 [ext_resource type="Script" path="res://src/ui/pause_menu/pause_menu.gd" id="18_1dvcn"]
 [ext_resource type="PackedScene" path="res://src/ui/victory/victory.tscn" id="19_nqq83"]
 [ext_resource type="Script" path="res://src/ui/victory/victory.gd" id="20_i0ago"]
+[ext_resource type="PackedScene" path="res://src/pickups/heart/heart.tscn" id="21_0vs3x"]
+[ext_resource type="Script" path="res://src/pickups/heart/heart.gd" id="22_mq8ho"]
+[ext_resource type="Script" path="res://src/levels/level_music.gd" id="23_saurp"]
+[ext_resource type="AudioStream" path="res://assets/audio/theme5.wav" id="24_1ls8r"]
 
 [node name="Level05" type="Node2D" unique_id=74925882]
 
@@ -400,3 +404,13 @@ script = ExtResource("18_1dvcn")
 [node name="Victory" type="CanvasLayer" parent="." unique_id=1330490385 instance=ExtResource("19_nqq83")]
 layer = 20
 script = ExtResource("20_i0ago")
+
+[node name="Heart" type="Area2D" parent="." unique_id=41243508 instance=ExtResource("21_0vs3x")]
+position = Vector2(1704, 144)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("22_mq8ho")
+
+[node name="LevelMusic" type="Node" parent="." unique_id=1132141210]
+script = ExtResource("23_saurp")
+track = ExtResource("24_1ls8r")

@@ -19,7 +19,7 @@ var deaths: int = 0
 func _ready() -> void:
 	# EventBus is loaded before GameManager (autoload order), so it's safe here.
 	EventBus.enemy_killed.connect(func(): add_score(1))
-	EventBus.boss_defeated.connect(func(): add_score(LEVEL_COMPLETE_BONUS))
+	EventBus.boss_defeated.connect(func(): add_score(LEVEL_COMPLETE_BONUS); heal(1))
 
 
 func add_score(amount: int) -> void:
@@ -34,6 +34,12 @@ func apply_damage(amount: int) -> void:
 
 func reset_health() -> void:
 	health = MAX_HEALTH
+	health_changed.emit(health)
+
+
+## Restore health (capped at max). Used by heart pickups and boss kills.
+func heal(amount: int) -> void:
+	health = mini(MAX_HEALTH, health + amount)
 	health_changed.emit(health)
 
 

@@ -3,7 +3,6 @@ extends Node
 ## the SFX bus, so the (future) options sliders can mix them. The single entry point
 ## for sound — gameplay calls play_music / play_sfx instead of spawning players.
 
-const MUSIC_PATH := "res://assets/pixelart/medieval tutorial 2d pixelart/music/time_for_adventure.mp3"
 const SFX_POOL_SIZE := 8
 
 var _music: AudioStreamPlayer
@@ -24,17 +23,21 @@ func _ready() -> void:
 		_sfx_pool.append(p)
 
 	_load_volumes()
-
-	# Loop and start the 8-bit background track.
-	var track: AudioStream = load(MUSIC_PATH)
-	if track is AudioStreamMP3:
-		(track as AudioStreamMP3).loop = true
-	play_music(track)
+	# Music is started per-scene (menu + each level) via play_music().
 
 
+## Play a looping music track. Ignores the call if that track is already playing
+## (so reloading/re-entering a level with the same song doesn't restart it).
 func play_music(stream: AudioStream) -> void:
-	if stream == null:
+	if stream == null or (_music.stream == stream and _music.playing):
 		return
+	if stream is AudioStreamWAV:
+		var w := stream as AudioStreamWAV
+		w.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		w.loop_begin = 0
+		w.loop_end = w.data.size() / 2   # frames (16-bit mono)
+	elif stream is AudioStreamMP3:
+		(stream as AudioStreamMP3).loop = true
 	_music.stream = stream
 	_music.play()
 

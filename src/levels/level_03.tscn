@@ -19,6 +19,10 @@
 [ext_resource type="PackedScene" path="res://src/ui/pause_menu/pause_menu.tscn" id="17_rtlrl"]
 [ext_resource type="Script" path="res://src/ui/pause_menu/pause_menu.gd" id="18_kt7j5"]
 [ext_resource type="Script" path="res://src/levels/level_transition.gd" id="19_o6tyq"]
+[ext_resource type="PackedScene" path="res://src/pickups/heart/heart.tscn" id="20_exvml"]
+[ext_resource type="Script" path="res://src/pickups/heart/heart.gd" id="21_x4hoh"]
+[ext_resource type="Script" path="res://src/levels/level_music.gd" id="22_fjdse"]
+[ext_resource type="AudioStream" path="res://assets/audio/theme3.wav" id="23_c664s"]
 
 [node name="Level03" type="Node2D" unique_id=2103520413]
 
@@ -387,3 +391,13 @@ script = ExtResource("18_kt7j5")
 [node name="LevelTransition" type="Node" parent="." unique_id=1079834478]
 script = ExtResource("19_o6tyq")
 next_scene = "res://src/ui/cutscene/cutscene_3.tscn"
+
+[node name="Heart" type="Area2D" parent="." unique_id=930331697 instance=ExtResource("20_exvml")]
+position = Vector2(1608, 144)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("21_x4hoh")
+
+[node name="LevelMusic" type="Node" parent="." unique_id=359747364]
+script = ExtResource("22_fjdse")
+track = ExtResource("23_c664s")
