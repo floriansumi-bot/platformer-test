@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://src/player/player.tscn" id="9_6yjdu"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="10_s7fgk"]
 [ext_resource type="PackedScene" path="res://src/ui/hud/hud.tscn" id="11_hud"]
+[ext_resource type="PackedScene" path="res://src/ui/pause_menu/pause_menu.tscn" id="12_pause"]
 
 [node name="Level01" type="Node2D" unique_id=1060822979]
 
@@ -572,3 +573,5 @@ limit_bottom = 180
 position_smoothing_enabled = true
 
 [node name="HUD" parent="." instance=ExtResource("11_hud")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("12_pause")]

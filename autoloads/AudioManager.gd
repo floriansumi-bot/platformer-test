@@ -23,6 +23,8 @@ func _ready() -> void:
 		add_child(p)
 		_sfx_pool.append(p)
 
+	_load_volumes()
+
 	# Loop and start the 8-bit background track.
 	var track: AudioStream = load(MUSIC_PATH)
 	if track is AudioStreamMP3:
@@ -52,3 +54,15 @@ func play_sfx(stream: AudioStream, volume_db: float = 0.0) -> void:
 	player.stream = stream
 	player.volume_db = volume_db
 	player.play()
+
+
+## Apply persisted volumes (set in the Options menu) to the audio buses at startup.
+func _load_volumes() -> void:
+	var cfg := ConfigFile.new()
+	if cfg.load("user://settings.cfg") != OK:
+		return
+	for bus in ["Master", "Music", "SFX"]:
+		var idx := AudioServer.get_bus_index(bus)
+		if idx >= 0:
+			var linear: float = cfg.get_value("audio", bus.to_lower(), 1.0)
+			AudioServer.set_bus_volume_db(idx, linear_to_db(linear))

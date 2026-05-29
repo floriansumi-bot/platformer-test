@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="platformer-test"
-run/main_scene="res://src/levels/level_01.tscn"
+run/main_scene="res://src/ui/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,7 @@ EventBus="*res://autoloads/EventBus.gd"
 GameManager="*res://autoloads/GameManager.gd"
 AudioManager="*res://autoloads/AudioManager.gd"
 SceneTransitioner="*res://autoloads/SceneTransitioner.gd"
+Leaderboard="*res://autoloads/Leaderboard.gd"
 
 [display]
 
