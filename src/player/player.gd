@@ -45,6 +45,7 @@ var dying: bool = false
 
 
 func _ready() -> void:
+	add_to_group("player")
 	air_jumps_left = max_air_jumps
 	hurtbox.hurt.connect(_on_hurt)
 	feet.area_entered.connect(_on_feet_area_entered)

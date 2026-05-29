@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://src/player/player.gd" id="10_s7fgk"]
 [ext_resource type="PackedScene" path="res://src/ui/hud/hud.tscn" id="11_hud"]
 [ext_resource type="PackedScene" path="res://src/ui/pause_menu/pause_menu.tscn" id="12_pause"]
+[ext_resource type="PackedScene" path="res://src/enemies/boss/boss.tscn" id="13_boss"]
+[ext_resource type="PackedScene" path="res://src/ui/victory/victory.tscn" id="14_victory"]
 
 [node name="Level01" type="Node2D" unique_id=1060822979]
 
@@ -575,3 +577,8 @@ position_smoothing_enabled = true
 [node name="HUD" parent="." instance=ExtResource("11_hud")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_pause")]
+
+[node name="Boss" parent="." instance=ExtResource("13_boss")]
+position = Vector2(3288, 120)
+
+[node name="Victory" parent="." instance=ExtResource("14_victory")]

@@ -1,0 +1,88 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/pixelart/medieval tutorial 2d pixelart/sprites/slime_purple.png" id="1_jhilg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_le5kc"]
+atlas = ExtResource("1_jhilg")
+region = Rect2(48, 48, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hoiyb"]
+atlas = ExtResource("1_jhilg")
+region = Rect2(0, 0, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hk7d0"]
+atlas = ExtResource("1_jhilg")
+region = Rect2(24, 0, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nml5n"]
+atlas = ExtResource("1_jhilg")
+region = Rect2(48, 0, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he7fv"]
+atlas = ExtResource("1_jhilg")
+region = Rect2(72, 0, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8e1nd"]
+atlas = ExtResource("1_jhilg")
+region = Rect2(0, 24, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v1sf"]
+atlas = ExtResource("1_jhilg")
+region = Rect2(24, 24, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4361"]
+atlas = ExtResource("1_jhilg")
+region = Rect2(48, 24, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vddlv"]
+atlas = ExtResource("1_jhilg")
+region = Rect2(72, 24, 24, 24)
+filter_clip = true
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_le5kc")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hoiyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hk7d0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nml5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he7fv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8e1nd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4v1sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4361")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vddlv")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]

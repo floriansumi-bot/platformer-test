@@ -16,7 +16,7 @@ size = Vector2(12, 22)
 size = Vector2(12, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feet"]
-size = Vector2(10, 4)
+size = Vector2(14, 6)
 
 [node name="Player" type="CharacterBody2D" unique_id=2110784419]
 collision_layer = 2
