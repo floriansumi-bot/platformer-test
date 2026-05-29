@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	var adv := event.is_action_pressed("jump") or event.is_action_pressed("ui_accept")
 	adv = adv or (event is InputEventMouseButton and event.pressed)
+	adv = adv or (event is InputEventScreenTouch and event.pressed)   # tap anywhere on mobile
 	if adv:
 		_advance()
 

@@ -48,48 +48,48 @@ offset_bottom = 22.0
 theme_override_constants/separation = 1
 
 [node name="TouchLeft" type="TouchScreenButton" parent="."]
-position = Vector2(8, 136)
-scale = Vector2(0.5, 0.5)
+position = Vector2(2, 122)
+scale = Vector2(0.72, 0.72)
 texture_normal = ExtResource("3_left")
 shape = SubResource("btnshape")
 action = &"move_left"
 visibility_mode = 1
 
 [node name="TouchRight" type="TouchScreenButton" parent="."]
-position = Vector2(46, 136)
-scale = Vector2(0.5, 0.5)
+position = Vector2(52, 122)
+scale = Vector2(0.72, 0.72)
 texture_normal = ExtResource("4_right")
 shape = SubResource("btnshape")
 action = &"move_right"
 visibility_mode = 1
 
 [node name="TouchSword" type="TouchScreenButton" parent="."]
-position = Vector2(236, 136)
-scale = Vector2(0.5, 0.5)
+position = Vector2(218, 124)
+scale = Vector2(0.66, 0.66)
 texture_normal = ExtResource("6_sword")
 shape = SubResource("btnshape")
 action = &"attack"
 visibility_mode = 1
 
 [node name="TouchJump" type="TouchScreenButton" parent="."]
-position = Vector2(278, 136)
-scale = Vector2(0.5, 0.5)
+position = Vector2(268, 118)
+scale = Vector2(0.8, 0.8)
 texture_normal = ExtResource("5_jump")
 shape = SubResource("btnshape")
 action = &"jump"
 visibility_mode = 1
 
 [node name="TouchWand" type="TouchScreenButton" parent="."]
-position = Vector2(278, 100)
-scale = Vector2(0.5, 0.5)
+position = Vector2(238, 78)
+scale = Vector2(0.62, 0.62)
 texture_normal = ExtResource("7_wand")
 shape = SubResource("btnshape")
 action = &"wand"
 visibility_mode = 1
 
 [node name="TouchPause" type="TouchScreenButton" parent="."]
-position = Vector2(150, 5)
-scale = Vector2(0.4, 0.4)
+position = Vector2(150, 4)
+scale = Vector2(0.46, 0.46)
 texture_normal = ExtResource("8_pause")
 shape = SubResource("btnshape")
 action = &"pause"
