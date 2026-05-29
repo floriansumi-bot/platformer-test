@@ -1,0 +1,52 @@
+name: Build
+
+# Auto-build all targets when a version tag is pushed (e.g. `git tag v0.1.0 && git push --tags`).
+# Also runnable manually from the Actions tab. Builds are uploaded as downloadable artifacts.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GODOT: "4.6.3"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Godot ${{ env.GODOT }} + export templates
+        run: |
+          set -e
+          BASE="https://github.com/godotengine/godot/releases/download/${GODOT}-stable"
+          wget -qO godot.zip "$BASE/Godot_v${GODOT}-stable_linux.x86_64.zip"
+          unzip -q godot.zip
+          sudo mv "Godot_v${GODOT}-stable_linux.x86_64" /usr/local/bin/godot
+          sudo chmod +x /usr/local/bin/godot
+          wget -qO templates.tpz "$BASE/Godot_v${GODOT}-stable_export_templates.tpz"
+          mkdir -p "$HOME/.local/share/godot/export_templates/${GODOT}.stable"
+          unzip -q templates.tpz -d tpl
+          mv tpl/templates/* "$HOME/.local/share/godot/export_templates/${GODOT}.stable/"
+
+      - name: Import project (build the class cache)
+        run: godot --headless --path . --import 2>/dev/null || true
+
+      - name: Export web + desktop
+        run: |
+          mkdir -p build/web build/linux build/windows
+          godot --headless --path . --export-release "Web" build/web/index.html
+          godot --headless --path . --export-release "Linux/X11" build/linux/game.x86_64
+          godot --headless --path . --export-release "Windows Desktop" build/windows/game.exe
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: build/web
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: build/linux
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: build/windows
