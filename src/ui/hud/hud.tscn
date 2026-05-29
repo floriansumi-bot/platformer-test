@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://src/ui/hud/hud.gd" id="1_hud"]
 [ext_resource type="Theme" path="res://src/ui/theme_main.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://assets/textures/tb_left.png" id="3_left"]
+[ext_resource type="Texture2D" path="res://assets/textures/tb_right.png" id="4_right"]
+[ext_resource type="Texture2D" path="res://assets/textures/tb_jump.png" id="5_jump"]
+[ext_resource type="Texture2D" path="res://assets/textures/tb_sword.png" id="6_sword"]
+[ext_resource type="Texture2D" path="res://assets/textures/tb_wand.png" id="7_wand"]
+[ext_resource type="Texture2D" path="res://assets/textures/tb_pause.png" id="8_pause"]
+
+[sub_resource type="CircleShape2D" id="btnshape"]
+radius = 30.0
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_hud")
@@ -37,3 +46,51 @@ offset_top = 4.0
 offset_right = 60.0
 offset_bottom = 22.0
 theme_override_constants/separation = 1
+
+[node name="TouchLeft" type="TouchScreenButton" parent="."]
+position = Vector2(8, 136)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_left")
+shape = SubResource("btnshape")
+action = &"move_left"
+visibility_mode = 1
+
+[node name="TouchRight" type="TouchScreenButton" parent="."]
+position = Vector2(46, 136)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_right")
+shape = SubResource("btnshape")
+action = &"move_right"
+visibility_mode = 1
+
+[node name="TouchSword" type="TouchScreenButton" parent="."]
+position = Vector2(236, 136)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_sword")
+shape = SubResource("btnshape")
+action = &"attack"
+visibility_mode = 1
+
+[node name="TouchJump" type="TouchScreenButton" parent="."]
+position = Vector2(278, 136)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("5_jump")
+shape = SubResource("btnshape")
+action = &"jump"
+visibility_mode = 1
+
+[node name="TouchWand" type="TouchScreenButton" parent="."]
+position = Vector2(278, 100)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("7_wand")
+shape = SubResource("btnshape")
+action = &"wand"
+visibility_mode = 1
+
+[node name="TouchPause" type="TouchScreenButton" parent="."]
+position = Vector2(150, 5)
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("8_pause")
+shape = SubResource("btnshape")
+action = &"pause"
+visibility_mode = 1
