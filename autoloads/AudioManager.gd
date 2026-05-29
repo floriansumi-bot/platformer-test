@@ -35,7 +35,9 @@ func play_music(stream: AudioStream) -> void:
 		var w := stream as AudioStreamWAV
 		w.loop_mode = AudioStreamWAV.LOOP_FORWARD
 		w.loop_begin = 0
-		w.loop_end = w.data.size() / 2   # frames (16-bit mono)
+		# loop the whole track. Use length×rate (NOT data.size(), which is the
+		# compressed byte count for ADPCM-imported WAVs → loops far too early).
+		w.loop_end = int(w.get_length() * w.mix_rate)
 	elif stream is AudioStreamMP3:
 		(stream as AudioStreamMP3).loop = true
 	_music.stream = stream

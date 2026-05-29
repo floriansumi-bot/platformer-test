@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://src/ui/main_menu/main_menu.gd" id="1"]
 [ext_resource type="Theme" path="res://src/ui/theme_main.tres" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" path="res://assets/textures/bg_hills_far.png" id="4"]
 [ext_resource type="Texture2D" path="res://assets/textures/bg_hills_near.png" id="5"]
 [ext_resource type="SpriteFrames" path="res://src/player/player_frames.tres" id="6"]
+[ext_resource type="SpriteFrames" path="res://src/enemies/slime/slime_frames.tres" id="7"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -43,11 +44,18 @@ expand_mode = 1
 stretch_mode = 0
 
 [node name="Knight" type="AnimatedSprite2D" parent="."]
-position = Vector2(54, 128)
+position = Vector2(40, 150)
 scale = Vector2(2.5, 2.5)
 sprite_frames = ExtResource("6")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="Slime" type="AnimatedSprite2D" parent="."]
+position = Vector2(120, 152)
+scale = Vector2(2.8, 2.8)
+sprite_frames = ExtResource("7")
+animation = &"walk"
+autoplay = "walk"
 
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1

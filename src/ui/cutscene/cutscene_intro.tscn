@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://src/ui/cutscene/cutscene.tscn" id="1"]
+
+[node name="Cutscene" instance=ExtResource("1")]
+lines = Array[String](["They burned the village while Sir Aldric slept. He woke to ash where his children's laughter used to be.", "His wife pressed their last coin into his hand and told him to run. He never saw which way she fell.", "Now only the blade remains, and a road of monsters between him and the ones who struck the match. He walks. He does not stop."])
+next_scene = "res://src/levels/level_01.tscn"
