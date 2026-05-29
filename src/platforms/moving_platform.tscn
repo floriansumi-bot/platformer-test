@@ -1,6 +1,7 @@
-[gd_scene format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://src/platforms/moving_platform.gd" id="1_hjnew"]
+[ext_resource type="Texture2D" path="res://assets/pixelart/medieval tutorial 2d pixelart/sprites/platforms.png" id="2_plat"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iedl8"]
 size = Vector2(44, 10)
@@ -9,13 +10,11 @@ size = Vector2(44, 10)
 collision_mask = 0
 script = ExtResource("1_hjnew")
 
-[node name="@CollisionShape2D@11" type="CollisionShape2D" parent="." unique_id=19744209]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_iedl8")
 
-[node name="@Polygon2D@12" type="Polygon2D" parent="." unique_id=1945471256]
-color = Color(0.45, 0.45, 0.52, 1)
-polygon = PackedVector2Array(-22, -5, 22, -5, 22, 5, -22, 5)
-
-[node name="@Polygon2D@13" type="Polygon2D" parent="." unique_id=1538938048]
-color = Color(0.65, 0.65, 0.72, 1)
-polygon = PackedVector2Array(-22, -5, 22, -5, 22, -2, -22, -2)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_plat")
+region_enabled = true
+region_rect = Rect2(0, 16, 48, 16)

@@ -15,10 +15,13 @@ const DEATH_SFX: AudioStream = preload("res://assets/pixelart/medieval tutorial 
 @export var friction: float = 1500.0
 
 @export_group("Jump")
-## Initial upward velocity on jump (negative = up).
-@export var jump_velocity: float = -400.0
-## Downward acceleration in px/s². Higher than project gravity for a snappy, non-floaty arc.
-@export var gravity: float = 1400.0
+## Initial upward velocity on jump (negative = up). Tuned to 2/3 of the old
+## speed (with gravity scaled to match) so the arc rises/falls slower at the
+## same height.
+@export var jump_velocity: float = -267.0
+## Downward acceleration in px/s². Scaled with jump_velocity to keep the jump
+## height while making the whole arc 2/3 as fast.
+@export var gravity: float = 622.0
 ## Gravity is multiplied by this while falling, for a snappier descent.
 @export var fall_gravity_multiplier: float = 1.8
 ## Fraction of upward velocity kept when the jump button is released early.
@@ -187,7 +190,10 @@ func play_anim(anim: StringName) -> void:
 func _on_feet_area_entered(area: Area2D) -> void:
 	if velocity.y > 0.0 and area is Hurtbox:
 		(area as Hurtbox).take_hit(10)   # kill the stomped enemy
-		velocity.y = stomp_bounce
+		# Bounce — but if you're holding jump as you land the stomp, spring much
+		# higher (a timed stomp-jump).
+		var boost := 1.7 if Input.is_action_pressed("jump") else 1.0
+		velocity.y = stomp_bounce * boost
 		_grace(0.25)                      # brief i-frames so the dying enemy can't also hit us
 
 

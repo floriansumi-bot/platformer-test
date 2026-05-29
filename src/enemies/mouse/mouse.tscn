@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://src/enemies/slime/slime.gd" id="1"]
+[ext_resource type="SpriteFrames" path="res://src/enemies/mouse/mouse_frames.tres" id="2"]
+[ext_resource type="Script" path="res://src/components/hitbox.gd" id="3"]
+[ext_resource type="Script" path="res://src/components/hurtbox.gd" id="4"]
+
+[sub_resource type="RectangleShape2D" id="body"]
+size = Vector2(15, 10)
+
+[sub_resource type="RectangleShape2D" id="hit"]
+size = Vector2(15, 6)
+
+[sub_resource type="RectangleShape2D" id="stomp"]
+size = Vector2(20, 10)
+
+[node name="Mouse" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1")
+speed = 56.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(0.4, 0.4)
+sprite_frames = ExtResource("2")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("body")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 8)
+shape = SubResource("hit")
+
+[node name="StompBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompBox"]
+position = Vector2(0, -2)
+shape = SubResource("stomp")
+
+[node name="GroundRay" type="RayCast2D" parent="."]
+position = Vector2(7, 6)
+target_position = Vector2(0, 10)
+
+[node name="WallRay" type="RayCast2D" parent="."]
+position = Vector2(0, 4)
+target_position = Vector2(11, 0)

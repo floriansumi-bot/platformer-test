@@ -3,5 +3,5 @@
 [ext_resource type="PackedScene" path="res://src/ui/cutscene/cutscene.tscn" id="1"]
 
 [node name="Cutscene" instance=ExtResource("1")]
-lines = Array[String](["They burned the village while Sir Aldric slept. He woke to ash where his children's laughter used to be.", "His wife pressed their last coin into his hand and told him to run. He never saw which way she fell.", "Now only the blade remains, and a road of monsters between him and the ones who struck the match. He walks. He does not stop."])
+lines = Array[String](["They burned your village while you slept. You woke to ash where your children's laughter used to be.", "Your wife pressed her last coin into your hand and told you to run. You never saw which way she fell.", "Now only the blade remains, and a road of monsters between you and the ones who struck the match. You walk. You do not stop."])
 next_scene = "res://src/levels/level_01.tscn"
