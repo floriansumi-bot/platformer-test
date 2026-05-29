@@ -1,11 +1,21 @@
-name: Build
+name: Build & Deploy
 
-# Auto-build all targets when a version tag is pushed (e.g. `git tag v0.1.0 && git push --tags`).
-# Also runnable manually from the Actions tab. Builds are uploaded as downloadable artifacts.
+# On a version tag push (e.g. `git tag v0.1.0 && git push --tags`) — or a manual run —
+# build web + Linux + Windows, upload them as artifacts, and deploy the web build to
+# GitHub Pages (https://floriansumi-bot.github.io/platformer-test/).
 on:
   push:
     tags: ['v*']
   workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -38,9 +48,8 @@ jobs:
           godot --headless --path . --export-release "Linux/X11" build/linux/game.x86_64
           godot --headless --path . --export-release "Windows Desktop" build/windows/game.exe
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
-          name: web
           path: build/web
       - uses: actions/upload-artifact@v4
         with:
@@ -50,3 +59,13 @@ jobs:
         with:
           name: windows
           path: build/windows
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
