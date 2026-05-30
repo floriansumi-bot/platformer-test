@@ -23,6 +23,7 @@ var _base_scale: Vector2
 
 
 func _ready() -> void:
+	add_to_group("boss")
 	health = max_health
 	_base_scale = sprite.scale
 	player = get_tree().get_first_node_in_group("player")

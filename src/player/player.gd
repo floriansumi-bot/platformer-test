@@ -51,6 +51,8 @@ var wand_active: bool = false   # wand powerup charged — the wand button shoot
 var attacking: bool = false     # a sword swing is in progress
 var _wand_cooldown: float = 0.0 # min seconds between wand casts
 var _boots_tween: Tween         # ramps the super-boots jump boost back to normal
+var _boss_combo: bool = false       # currently stomping a boss
+var _boss_combo_clean: bool = true  # haven't touched the ground since it began
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var coyote_timer: Timer = $CoyoteTimer
@@ -65,6 +67,7 @@ func _ready() -> void:
 	air_jumps_left = max_air_jumps
 	hurtbox.hurt.connect(_on_hurt)
 	feet.area_entered.connect(_on_feet_area_entered)
+	EventBus.boss_defeated.connect(_on_boss_defeated)
 
 
 func _process(delta: float) -> void:
@@ -76,12 +79,15 @@ func _process(delta: float) -> void:
 	# Sword swing on the attack button (X key / gamepad X).
 	if not attacking and Input.is_action_just_pressed("attack"):
 		_swing_sword()
-	# Wand: while the powerup is charged, shoot an orb forward on the wand button
-	# (Y key / gamepad Y), rate-limited by a short cooldown.
+	# Wand: shoot an orb forward on the wand button (Y key / gamepad Y / on-screen
+	# wand). Always available; the wand powerup just makes it fire much faster.
 	_wand_cooldown = maxf(0.0, _wand_cooldown - delta)
-	if wand_active and _wand_cooldown <= 0.0 and Input.is_action_just_pressed("wand"):
+	if _wand_cooldown <= 0.0 and Input.is_action_just_pressed("wand"):
 		_shoot_orb()
-		_wand_cooldown = 0.3
+		_wand_cooldown = 0.12 if wand_active else 0.45
+	# Touching the floor breaks a no-ground boss combo (no helmet this time).
+	if _boss_combo and is_on_floor():
+		_boss_combo_clean = false
 
 
 ## Freeze, play the death sound, count the death, then reload after a short delay.
@@ -196,6 +202,20 @@ func _on_feet_area_entered(area: Area2D) -> void:
 		var boost := 1.7 if Input.is_action_pressed("jump") else 1.0
 		velocity.y = stomp_bounce * boost
 		_grace(0.25)                      # brief i-frames so the dying enemy can't also hit us
+		# Stomping a boss starts (or continues) a no-ground combo; land once and
+		# it's spoiled. A clean kill earns a helmet (see _on_boss_defeated).
+		if area.owner != null and area.owner.is_in_group("boss") and not _boss_combo:
+			_boss_combo = true
+			_boss_combo_clean = true
+
+
+## Boss died. If we killed it without ever touching the ground, earn a helmet
+## (it lands in the inventory to equip next level).
+func _on_boss_defeated() -> void:
+	if _boss_combo and _boss_combo_clean:
+		GameManager.award_helmet()
+	_boss_combo = false
+	_boss_combo_clean = true
 
 
 ## Enemy Hitbox struck our Hurtbox.

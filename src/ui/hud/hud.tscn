@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://src/ui/hud/hud.gd" id="1_hud"]
 [ext_resource type="Theme" path="res://src/ui/theme_main.tres" id="2_theme"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" path="res://assets/textures/tb_sword.png" id="6_sword"]
 [ext_resource type="Texture2D" path="res://assets/textures/tb_wand.png" id="7_wand"]
 [ext_resource type="Texture2D" path="res://assets/textures/tb_pause.png" id="8_pause"]
+[ext_resource type="Texture2D" path="res://assets/textures/tb_bag.png" id="9_bag"]
+[ext_resource type="PackedScene" path="res://src/ui/equipment/equipment.tscn" id="10_equip"]
 
 [sub_resource type="CircleShape2D" id="btnshape"]
 radius = 30.0
@@ -101,3 +103,14 @@ texture_normal = ExtResource("8_pause")
 shape = SubResource("btnshape")
 action = &"pause"
 visibility_mode = 1
+
+[node name="EquipButton" type="TextureButton" parent="."]
+offset_left = 116.0
+offset_top = 3.0
+offset_right = 146.0
+offset_bottom = 33.0
+texture_normal = ExtResource("9_bag")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Equipment" parent="." instance=ExtResource("10_equip")]

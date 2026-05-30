@@ -11,12 +11,12 @@ const HEART_EMPTY := preload("res://assets/textures/heart_empty.png")
 @onready var hearts: HBoxContainer = $Hearts
 @onready var powerups: HBoxContainer = $Powerups
 
-var _icons: Array[TextureRect] = []
+var _heart_fills: Array[Control] = []   # per-heart clip controls (width = fill)
 
 
 func _ready() -> void:
 	var gm := get_node(^"/root/GameManager")
-	_build_hearts(gm.MAX_HEALTH)
+	_build_hearts(int(gm.MAX_HEALTH))
 	_on_health(gm.health)
 	_on_score(gm.score)
 	_on_deaths(gm.deaths)
@@ -25,6 +25,7 @@ func _ready() -> void:
 	gm.deaths_changed.connect(_on_deaths)
 	EventBus.powerup_started.connect(_on_powerup_started)
 	EventBus.powerup_ended.connect(_on_powerup_ended)
+	$EquipButton.pressed.connect($Equipment.toggle)
 
 
 ## Show (or restart) a depleting-ring indicator for an active powerup.
@@ -46,17 +47,31 @@ func _on_powerup_ended(kind: String) -> void:
 
 
 func _build_hearts(count: int) -> void:
+	var sz := HEART_FULL.get_size()
 	for i in count:
-		var tr := TextureRect.new()
-		tr.texture = HEART_FULL
-		tr.stretch_mode = TextureRect.STRETCH_KEEP
-		hearts.add_child(tr)
-		_icons.append(tr)
+		# An empty heart with a left-to-right clipped full heart on top, so the
+		# fill width can show a fractional heart (e.g. 2/3 after a helmet-soaked hit).
+		var cont := Control.new()
+		cont.custom_minimum_size = sz
+		var empty := TextureRect.new()
+		empty.texture = HEART_EMPTY
+		cont.add_child(empty)
+		var clip := Control.new()
+		clip.clip_contents = true
+		clip.size = sz
+		var full := TextureRect.new()
+		full.texture = HEART_FULL
+		clip.add_child(full)
+		cont.add_child(clip)
+		hearts.add_child(cont)
+		_heart_fills.append(clip)
 
 
-func _on_health(n: int) -> void:
-	for i in _icons.size():
-		_icons[i].texture = HEART_FULL if i < n else HEART_EMPTY
+func _on_health(h: float) -> void:
+	var w := HEART_FULL.get_size().x
+	for i in _heart_fills.size():
+		var fill := clampf(h - float(i), 0.0, 1.0)
+		_heart_fills[i].size.x = w * fill
 
 
 func _on_score(n: int) -> void:

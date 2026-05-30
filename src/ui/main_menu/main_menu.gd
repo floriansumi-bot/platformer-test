@@ -14,7 +14,7 @@ func _ready() -> void:
 	AudioManager.play_music(preload("res://assets/audio/theme1.wav"))
 	# Play runs the intro story cards first, which then load level 1. Death sends
 	# the player to the previous level (never back through the intro).
-	$Center/VBox/Play.pressed.connect(func(): SceneTransitioner.change_scene("res://src/ui/cutscene/cutscene_intro.tscn"))
+	$Center/VBox/Play.pressed.connect(func(): GameManager.new_game(); SceneTransitioner.change_scene("res://src/ui/cutscene/cutscene_intro.tscn"))
 	$Center/VBox/Options.pressed.connect(func(): SceneTransitioner.change_scene("res://src/ui/options/options_menu.tscn"))
 	$Center/VBox/HighScores.pressed.connect(func(): SceneTransitioner.change_scene("res://src/ui/high_scores/high_scores.tscn"))
 	$Center/VBox/Quit.pressed.connect(func(): get_tree().quit())
