@@ -312,7 +312,7 @@ func apply_powerup(kind: String) -> void:
 			_revert_after(func(): speed_mult = 1.0, 5.0)
 		"boots":
 			jump_mult = 1.7
-			_revert_after(func(): jump_mult = 1.0, 20.0)
+			_revert_after(func(): jump_mult = 1.0, 8.0)
 
 
 func _revert_after(revert: Callable, seconds: float) -> void:
