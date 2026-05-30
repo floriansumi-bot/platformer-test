@@ -37,7 +37,7 @@ const DEATH_SFX: AudioStream = preload("res://assets/pixelart/medieval tutorial 
 
 ## Damage the sword swing deals — same as a stomp (see _on_feet_area_entered).
 const SWORD_DAMAGE := 10
-const SUPERNOVA: PackedScene = preload("res://src/pickups/supernova/supernova.tscn")
+const WAND_ORB: PackedScene = preload("res://src/pickups/wand_orb/wand_orb.tscn")
 
 var air_jumps_left: int = 0
 var invincible: bool = false
@@ -47,7 +47,7 @@ var dying: bool = false
 var speed_mult: float = 1.0   # banana slows to 0.5
 var jump_mult: float = 1.0    # super boots raise to 1.7
 var shield_hits: int = 0      # absorbs this many hits before real damage
-var wand_active: bool = false   # wand powerup charged — the wand button casts a supernova
+var wand_active: bool = false   # wand powerup charged — the wand button shoots an orb
 var attacking: bool = false     # a sword swing is in progress
 var _wand_cooldown: float = 0.0 # min seconds between wand casts
 var _boots_tween: Tween         # ramps the super-boots jump boost back to normal
@@ -76,12 +76,12 @@ func _process(delta: float) -> void:
 	# Sword swing on the attack button (X key / gamepad X).
 	if not attacking and Input.is_action_just_pressed("attack"):
 		_swing_sword()
-	# Wand: while the powerup is charged, cast a supernova on the wand button
+	# Wand: while the powerup is charged, shoot an orb forward on the wand button
 	# (Y key / gamepad Y), rate-limited by a short cooldown.
 	_wand_cooldown = maxf(0.0, _wand_cooldown - delta)
 	if wand_active and _wand_cooldown <= 0.0 and Input.is_action_just_pressed("wand"):
-		_spawn_supernova()
-		_wand_cooldown = 0.6
+		_shoot_orb()
+		_wand_cooldown = 0.3
 
 
 ## Freeze, play the death sound, count the death, then reload after a short delay.
@@ -309,7 +309,7 @@ func apply_powerup(kind: String) -> void:
 			duration = 30.0
 			_revert_after(func(): shield_hits = 0, duration, "shield")
 		"wand":
-			# Charge the wand for 12s; the player casts supernovas with the wand button.
+			# Charge the wand for 12s; the player shoots orbs with the wand button.
 			wand_active = true
 			duration = 12.0
 			_revert_after(func(): wand_active = false, duration, "wand")
@@ -351,10 +351,13 @@ func _revert_after(revert: Callable, seconds: float, kind: String = "") -> void:
 			EventBus.powerup_ended.emit(kind)
 
 
-func _spawn_supernova() -> void:
+## Fire a wand orb straight ahead in the direction the knight faces.
+func _shoot_orb() -> void:
 	var scene := get_tree().current_scene
 	if scene == null:
 		return
-	var nova := SUPERNOVA.instantiate()
-	scene.add_child(nova)
-	nova.global_position = global_position
+	var d := -1.0 if sprite.flip_h else 1.0
+	var orb := WAND_ORB.instantiate()
+	scene.add_child(orb)
+	orb.global_position = global_position + Vector2(d * 12.0, -2.0)
+	orb.dir = Vector2(d, 0.0)

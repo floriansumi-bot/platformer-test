@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://src/pickups/supernova/supernova.gd" id="1"]
+[ext_resource type="Script" path="res://src/pickups/wand_orb/wand_orb.gd" id="1"]
 
 [sub_resource type="CircleShape2D" id="c"]
-radius = 16.0
+radius = 8.0
 
-[node name="Supernova" type="Area2D"]
+[node name="WandOrb" type="Area2D"]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1")
