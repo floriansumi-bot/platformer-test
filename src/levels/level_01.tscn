@@ -372,6 +372,13 @@ collision_mask = 2
 script = ExtResource("31_buk32")
 kind = "boots"
 
+[node name="WandStart" type="Area2D" parent="." unique_id=783548262 instance=ExtResource("30_g8qap")]
+position = Vector2(152, 142)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("31_buk32")
+kind = "wand"
+
 [node name="@Area2D@11" type="Area2D" parent="." unique_id=604741501 instance=ExtResource("30_g8qap")]
 position = Vector2(424, 80)
 collision_layer = 0
