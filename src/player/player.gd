@@ -5,6 +5,7 @@ class_name Player
 extends CharacterBody2D
 
 const DEATH_SFX: AudioStream = preload("res://assets/pixelart/medieval tutorial 2d pixelart/sounds/explosion.wav")
+const WAND_SFX: AudioStream = preload("res://assets/pixelart/medieval tutorial 2d pixelart/sounds/power_up.wav")
 
 @export_group("Movement")
 ## Top horizontal speed in px/s.
@@ -381,3 +382,4 @@ func _shoot_orb() -> void:
 	scene.add_child(orb)
 	orb.global_position = global_position + Vector2(d * 12.0, -2.0)
 	orb.dir = Vector2(d, 0.0)
+	AudioManager.play_sfx(WAND_SFX, -2.0)
