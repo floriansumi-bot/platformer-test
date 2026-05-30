@@ -50,6 +50,7 @@ var shield_hits: int = 0      # absorbs this many hits before real damage
 var wand_active: bool = false   # wand powerup charged — the wand button casts a supernova
 var attacking: bool = false     # a sword swing is in progress
 var _wand_cooldown: float = 0.0 # min seconds between wand casts
+var _boots_tween: Tween         # ramps the super-boots jump boost back to normal
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var coyote_timer: Timer = $CoyoteTimer
@@ -204,6 +205,8 @@ func _on_hurt(_amount: int) -> void:
 	# Shield powerup soaks hits before real health is touched.
 	if shield_hits > 0:
 		shield_hits -= 1
+		if shield_hits == 0:
+			EventBus.powerup_ended.emit("shield")   # used up before its timer
 		velocity.y = -120.0
 		_flash()
 		_grace(0.5)
@@ -299,26 +302,53 @@ func _make_slash(dir: float) -> Node2D:
 
 ## Apply a timed powerup effect. Called by powerup pickups on touch.
 func apply_powerup(kind: String) -> void:
+	var duration := 0.0
 	match kind:
 		"shield":
 			shield_hits = 2
-			_revert_after(func(): shield_hits = 0, 30.0)
+			duration = 30.0
+			_revert_after(func(): shield_hits = 0, duration, "shield")
 		"wand":
 			# Charge the wand for 12s; the player casts supernovas with the wand button.
 			wand_active = true
-			_revert_after(func(): wand_active = false, 12.0)
+			duration = 12.0
+			_revert_after(func(): wand_active = false, duration, "wand")
 		"banana":
 			speed_mult = 0.5
-			_revert_after(func(): speed_mult = 1.0, 5.0)
+			duration = 5.0
+			_revert_after(func(): speed_mult = 1.0, duration, "banana")
 		"boots":
-			jump_mult = 1.7
-			_revert_after(func(): jump_mult = 1.0, 8.0)
+			duration = 8.0
+			_apply_boots(duration)
+	if duration > 0.0:
+		# HUD shows the icon + a depleting ring for this long.
+		EventBus.powerup_started.emit(kind, duration)
 
 
-func _revert_after(revert: Callable, seconds: float) -> void:
+## Super boots: full 1.7x jump for the first second, then ease back down to a
+## normal jump (1.0x) by the end of `duration`.
+func _apply_boots(duration: float) -> void:
+	if _boots_tween != null and _boots_tween.is_valid():
+		_boots_tween.kill()
+	jump_mult = 1.7
+	_boots_tween = create_tween()
+	_boots_tween.tween_interval(1.0)
+	_boots_tween.tween_property(self, "jump_mult", 1.0, maxf(0.1, duration - 1.0))
+	_boots_tween.tween_callback(_end_boots)
+
+
+func _end_boots() -> void:
+	jump_mult = 1.0
+	EventBus.powerup_ended.emit("boots")
+
+
+## Run `revert` after `seconds`; if a kind is given, also tell the HUD it ended.
+func _revert_after(revert: Callable, seconds: float, kind: String = "") -> void:
 	await get_tree().create_timer(seconds).timeout
 	if is_instance_valid(self):
 		revert.call()
+		if kind != "":
+			EventBus.powerup_ended.emit(kind)
 
 
 func _spawn_supernova() -> void:

@@ -9,6 +9,7 @@ const HEART_EMPTY := preload("res://assets/textures/heart_empty.png")
 @onready var score_label: Label = $Margin/VBox/ScoreLabel
 @onready var death_label: Label = $Margin/VBox/DeathLabel
 @onready var hearts: HBoxContainer = $Hearts
+@onready var powerups: HBoxContainer = $Powerups
 
 var _icons: Array[TextureRect] = []
 
@@ -22,6 +23,26 @@ func _ready() -> void:
 	gm.health_changed.connect(_on_health)
 	gm.score_changed.connect(_on_score)
 	gm.deaths_changed.connect(_on_deaths)
+	EventBus.powerup_started.connect(_on_powerup_started)
+	EventBus.powerup_ended.connect(_on_powerup_ended)
+
+
+## Show (or restart) a depleting-ring indicator for an active powerup.
+func _on_powerup_started(kind: String, duration: float) -> void:
+	for c in powerups.get_children():
+		if c is PowerupTimer and (c as PowerupTimer).kind == kind:
+			(c as PowerupTimer).restart(duration)
+			return
+	var t := PowerupTimer.new()
+	powerups.add_child(t)
+	t.setup(kind, duration)
+
+
+func _on_powerup_ended(kind: String) -> void:
+	for c in powerups.get_children():
+		if c is PowerupTimer and (c as PowerupTimer).kind == kind:
+			c.queue_free()
+			return
 
 
 func _build_hearts(count: int) -> void:

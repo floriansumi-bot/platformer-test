@@ -47,6 +47,13 @@ offset_right = 60.0
 offset_bottom = 22.0
 theme_override_constants/separation = 1
 
+[node name="Powerups" type="HBoxContainer" parent="."]
+offset_left = 6.0
+offset_top = 26.0
+offset_right = 240.0
+offset_bottom = 52.0
+theme_override_constants/separation = 4
+
 [node name="TouchLeft" type="TouchScreenButton" parent="."]
 position = Vector2(2, 122)
 scale = Vector2(0.72, 0.72)
