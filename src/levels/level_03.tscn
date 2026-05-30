@@ -36,7 +36,7 @@
 [node name="Level03" type="Node2D" unique_id=687817818]
 
 [node name="Sky" type="Parallax2D" parent="." unique_id=629269668]
-scroll_scale = Vector2(0.1, 1)
+scroll_scale = Vector2(0.1, 0)
 repeat_size = Vector2(320, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sky" unique_id=2146323301]
@@ -44,7 +44,7 @@ texture = ExtResource("1_tacb6")
 centered = false
 
 [node name="HillsFar" type="Parallax2D" parent="." unique_id=227042444]
-scroll_scale = Vector2(0.3, 1)
+scroll_scale = Vector2(0.3, 0)
 repeat_size = Vector2(320, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="HillsFar" unique_id=1295307181]
@@ -52,7 +52,7 @@ texture = ExtResource("2_o3sbu")
 centered = false
 
 [node name="HillsNear" type="Parallax2D" parent="." unique_id=1822326870]
-scroll_scale = Vector2(0.6, 1)
+scroll_scale = Vector2(0.6, 0)
 repeat_size = Vector2(320, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="HillsNear" unique_id=535930119]

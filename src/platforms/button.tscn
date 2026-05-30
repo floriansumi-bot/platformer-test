@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://src/platforms/button.gd" id="1_kvod7"]
-[ext_resource type="Texture2D" path="res://assets/pixelart/new-platformer-pack-1.1/Sprites/Tiles/Default/switch_red.png" id="2_switch"]
+[ext_resource type="Texture2D" path="res://assets/textures/switch_red.png" id="2_switch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6s6r"]
 size = Vector2(14, 8)

@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" load_steps=3 format=3]
 
-[ext_resource type="Texture2D" path="res://assets/pixelart/new-platformer-pack-1.1/Sprites/Enemies/Default/fly_a.png" id="1"]
-[ext_resource type="Texture2D" path="res://assets/pixelart/new-platformer-pack-1.1/Sprites/Enemies/Default/fly_b.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/textures/fly_a.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/textures/fly_b.png" id="2"]
 
 [resource]
 animations = [{

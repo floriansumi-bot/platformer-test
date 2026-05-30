@@ -3,7 +3,7 @@ extends Area2D
 ## A pressure plate. When the player steps on it, it opens the linked door so the
 ## path ahead can be passed. One-shot.
 
-const PRESSED_TEX: Texture2D = preload("res://assets/pixelart/new-platformer-pack-1.1/Sprites/Tiles/Default/switch_red_pressed.png")
+const PRESSED_TEX: Texture2D = preload("res://assets/textures/switch_red_pressed.png")
 
 @export var door_path: NodePath
 

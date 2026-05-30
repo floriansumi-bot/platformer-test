@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=4 format=3]
 
-[ext_resource type="Texture2D" path="res://assets/pixelart/new-platformer-pack-1.1/Sprites/Enemies/Default/mouse_walk_a.png" id="1"]
-[ext_resource type="Texture2D" path="res://assets/pixelart/new-platformer-pack-1.1/Sprites/Enemies/Default/mouse_walk_b.png" id="2"]
-[ext_resource type="Texture2D" path="res://assets/pixelart/new-platformer-pack-1.1/Sprites/Enemies/Default/mouse_rest.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/textures/mouse_walk_a.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/textures/mouse_walk_b.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/textures/mouse_rest.png" id="3"]
 
 [resource]
 animations = [{

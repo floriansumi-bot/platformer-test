@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://src/platforms/door.gd" id="1_v61rn"]
-[ext_resource type="Texture2D" path="res://assets/pixelart/new-platformer-pack-1.1/Sprites/Tiles/Default/door_closed.png" id="2_door"]
+[ext_resource type="Texture2D" path="res://assets/textures/door_closed.png" id="2_door"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cex1u"]
 size = Vector2(16, 32)
