@@ -1,0 +1,18 @@
+name = "fridge-chef"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+
+# Which AI provider to use for ingredient detection.
+#   "openai"    -> uses the OPENAI_API_KEY secret + OPENAI_MODEL below (default)
+#   "anthropic" -> uses the ANTHROPIC_API_KEY secret + ANTHROPIC_MODEL below
+[vars]
+PROVIDER = "openai"
+OPENAI_MODEL = "gpt-4o-mini"
+ANTHROPIC_MODEL = "claude-opus-4-8"
+# Lock this down to your Pages origin in production, e.g.
+# ALLOWED_ORIGIN = "https://floriansumi-bot.github.io"
+ALLOWED_ORIGIN = "*"
+
+# Secrets are NOT stored here. Set them once with:
+#   npx wrangler secret put OPENAI_API_KEY
+#   npx wrangler secret put ANTHROPIC_API_KEY   # only if PROVIDER = "anthropic"

@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "note": "Offline fallback recipe bank. Used automatically when the device has no internet connection. Slots: breakfast, main (lunch/dinner), dessert.",
+  "recipes": [
+    {
+      "id": "db-breakfast-omelette",
+      "title": "Classic Cheese Omelette",
+      "slot": "breakfast",
+      "area": "French",
+      "minutes": 10,
+      "ingredients": ["egg", "butter", "cheese", "milk", "salt", "pepper"],
+      "steps": [
+        "Whisk 3 eggs with a splash of milk, salt and pepper.",
+        "Melt butter in a non-stick pan over medium heat.",
+        "Pour in the eggs and let them set for 30 seconds, then gently push the edges in.",
+        "Scatter grated cheese over one half, fold, and slide onto a plate."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-breakfast-pancakes",
+      "title": "Fluffy Buttermilk Pancakes",
+      "slot": "breakfast",
+      "area": "American",
+      "minutes": 20,
+      "ingredients": ["flour", "milk", "egg", "butter", "sugar", "baking powder"],
+      "steps": [
+        "Mix flour, sugar, a pinch of salt and baking powder in a bowl.",
+        "Whisk in milk, an egg and melted butter until just combined.",
+        "Ladle batter onto a hot greased pan; flip when bubbles form on top.",
+        "Cook until golden and serve with syrup or fruit."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-breakfast-avocado-toast",
+      "title": "Avocado Toast with Egg",
+      "slot": "breakfast",
+      "area": "Cafe",
+      "minutes": 12,
+      "ingredients": ["bread", "avocado", "egg", "lemon", "chili flakes", "salt"],
+      "steps": [
+        "Toast two slices of bread until crisp.",
+        "Mash avocado with a squeeze of lemon, salt and chili flakes.",
+        "Fry or poach an egg to your liking.",
+        "Spread the avocado on the toast and top with the egg."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-main-fried-rice",
+      "title": "Quick Vegetable Fried Rice",
+      "slot": "main",
+      "area": "Chinese",
+      "minutes": 20,
+      "ingredients": ["rice", "egg", "carrot", "peas", "onion", "soy sauce", "garlic"],
+      "steps": [
+        "Heat oil in a wok and scramble a beaten egg, then set aside.",
+        "Fry diced onion, garlic, carrot and peas until tender.",
+        "Add cold cooked rice and stir-fry over high heat.",
+        "Return the egg, splash in soy sauce, and toss to combine."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-main-pasta-aglio",
+      "title": "Spaghetti Aglio e Olio",
+      "slot": "main",
+      "area": "Italian",
+      "minutes": 20,
+      "ingredients": ["pasta", "garlic", "olive oil", "chili flakes", "parsley", "salt"],
+      "steps": [
+        "Cook spaghetti in well-salted water until al dente.",
+        "Gently warm sliced garlic and chili flakes in olive oil — don't brown.",
+        "Toss the drained pasta in the oil with a splash of pasta water.",
+        "Finish with chopped parsley and serve."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-main-chicken-stirfry",
+      "title": "Chicken & Pepper Stir-Fry",
+      "slot": "main",
+      "area": "Asian",
+      "minutes": 25,
+      "ingredients": ["chicken", "pepper", "onion", "garlic", "soy sauce", "ginger", "rice"],
+      "steps": [
+        "Slice chicken thin and sear in a hot oiled pan until golden.",
+        "Add onion, peppers, garlic and ginger; stir-fry until crisp-tender.",
+        "Pour in soy sauce and a splash of water, simmer 2 minutes.",
+        "Serve over steamed rice."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-main-tomato-soup",
+      "title": "Tomato & Basil Soup",
+      "slot": "main",
+      "area": "European",
+      "minutes": 30,
+      "ingredients": ["tomato", "onion", "garlic", "vegetable stock", "basil", "cream"],
+      "steps": [
+        "Soften onion and garlic in a pot with a little oil.",
+        "Add chopped tomatoes and stock; simmer 20 minutes.",
+        "Blend smooth, stir in basil and a swirl of cream.",
+        "Season and serve with crusty bread."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-main-frittata",
+      "title": "Cheesy Veggie Frittata",
+      "slot": "main",
+      "area": "Italian",
+      "minutes": 25,
+      "ingredients": ["egg", "cheese", "potato", "onion", "pepper", "milk"],
+      "steps": [
+        "Soften diced potato, onion and pepper in an oven-proof pan.",
+        "Beat eggs with milk, cheese, salt and pepper.",
+        "Pour over the vegetables and cook until the edges set.",
+        "Finish under a hot grill until puffed and golden."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-dessert-mug-cake",
+      "title": "5-Minute Chocolate Mug Cake",
+      "slot": "dessert",
+      "area": "Quick",
+      "minutes": 5,
+      "ingredients": ["flour", "sugar", "cocoa", "milk", "oil", "baking powder"],
+      "steps": [
+        "Stir flour, sugar, cocoa and baking powder in a large mug.",
+        "Mix in milk and oil until smooth.",
+        "Microwave on high for about 90 seconds until risen.",
+        "Let cool a minute and enjoy warm."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-dessert-banana-bread",
+      "title": "Simple Banana Bread",
+      "slot": "dessert",
+      "area": "Bakery",
+      "minutes": 60,
+      "ingredients": ["banana", "flour", "sugar", "egg", "butter", "baking soda"],
+      "steps": [
+        "Mash ripe bananas and mix with melted butter, sugar and an egg.",
+        "Fold in flour and baking soda until just combined.",
+        "Pour into a lined loaf tin.",
+        "Bake at 175°C / 350°F for about 50 minutes until a skewer comes out clean."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-dessert-fruit-crumble",
+      "title": "Apple Oat Crumble",
+      "slot": "dessert",
+      "area": "British",
+      "minutes": 45,
+      "ingredients": ["apple", "flour", "butter", "sugar", "oats", "cinnamon"],
+      "steps": [
+        "Toss sliced apples with sugar and cinnamon in a baking dish.",
+        "Rub butter into flour, oats and sugar to make a crumble.",
+        "Scatter the crumble over the fruit.",
+        "Bake at 180°C / 350°F for 30 minutes until golden and bubbling."
+      ],
+      "source": "Fridge Chef offline bank"
+    },
+    {
+      "id": "db-dessert-yogurt-parfait",
+      "title": "Berry Yogurt Parfait",
+      "slot": "dessert",
+      "area": "No-bake",
+      "minutes": 8,
+      "ingredients": ["yogurt", "berries", "honey", "oats", "granola"],
+      "steps": [
+        "Spoon a layer of yogurt into a glass.",
+        "Add a layer of berries and a drizzle of honey.",
+        "Sprinkle granola or oats.",
+        "Repeat the layers and serve chilled."
+      ],
+      "source": "Fridge Chef offline bank"
+    }
+  ]
+}

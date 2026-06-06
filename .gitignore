@@ -32,3 +32,9 @@ assets/pixelart/*
 # Local Claude Code tooling / research notes — not part of the game itself.
 .claude/
 GODOT_SKILLS_PLAN.md
+
+# Fridge Chef (Node) — dependencies and build output
+node_modules/
+app/dist/
+.wrangler/
+*.tsbuildinfo
